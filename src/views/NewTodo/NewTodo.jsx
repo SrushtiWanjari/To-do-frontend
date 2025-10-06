@@ -4,8 +4,6 @@ import "./NewTodo.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-
-
 function NewTodo() {
   const [todoData, setTodoData] = useState({
     todoItem: "",
