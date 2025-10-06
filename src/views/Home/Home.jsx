@@ -5,11 +5,15 @@ import { Link } from "react-router";
 import DelIcon from "../../assets/DeleteIcon.png";
 import toast, { Toaster } from "react-hot-toast";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
+
 function Home() {
   const [todos, setTodos] = useState([]);
 
   const loadTodos = async () => {
-    const response = await axios.get("http://localhost:8080/todos");
+    const response = await axios.get(`${apiUrl}/todos`);
+
     setTodos(response.data.data);
   };
 
@@ -19,7 +23,7 @@ function Home() {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/todos/${id}`);
+      const response = await axios.delete(`${apiUrl}/todos/${id}`);
 
       if (response) {
         toast.success(response.data.message);
