@@ -4,9 +4,6 @@ import "./NewTodo.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-  const apiUrl = process.env.REACT_APP_API_URL;
-
-
 function NewTodo() {
   const [todoData, setTodoData] = useState({
     todoItem: "",
@@ -18,7 +15,10 @@ function NewTodo() {
 
   const addTodo = async () => {
     try {
-      const response = await axios.post(`${apiUrl}/todos`, todoData);
+      const response = await axios.post(
+        `https://to-do-backend-2-ikg7.onrender.com/todos`,
+        todoData
+      );
 
       if (response) {
         toast.success(response.data.message);

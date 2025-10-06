@@ -3,17 +3,14 @@ import "./Home.css";
 import axios from "axios";
 import { Link } from "react-router";
 import DelIcon from "../../assets/DeleteIcon.png";
-import toast, { Toaster } from "react-hot-toast";
-
-const apiUrl = process.env.REACT_APP_API_URL;
+import toast, { Toaster } from 'react-hot-toast'
 
 
 function Home() {
   const [todos, setTodos] = useState([]);
 
   const loadTodos = async () => {
-    const response = await axios.get(`${apiUrl}/todos`);
-
+    const response = await axios.get("https://to-do-backend-2-ikg7.onrender.com/todos");
     setTodos(response.data.data);
   };
 
@@ -23,14 +20,14 @@ function Home() {
 
   const deleteTodo = async (id) => {
     try {
-      const response = await axios.delete(`${apiUrl}/todos/${id}`);
-
+      const response = await axios.delete(`https://to-do-backend-2-ikg7.onrender.com/todos/${id}`);
+  
       if (response) {
         toast.success(response.data.message);
         loadTodos();
       }
     } catch (error) {
-      toast.error("Failed to delete!!");
+      toast.error("Failed to delete!!")
     }
   };
 
@@ -65,7 +62,7 @@ function Home() {
       <Link to="/new" className="fab">
         New ToDo
       </Link>
-      <Toaster />
+      <Toaster/>
     </div>
   );
 }
