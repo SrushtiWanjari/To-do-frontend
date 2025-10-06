@@ -4,7 +4,7 @@ import "./NewTodo.css";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-const API_URL = import.meta.env.VITE_APP_API_URL;
+
 
 function NewTodo() {
   const [todoData, setTodoData] = useState({
@@ -15,14 +15,24 @@ function NewTodo() {
 
   const [emojiPickerOpen, setEmojiPickerOpen] = useState(false);
 
- const addTodo = async () => {
-  try {
-    const response = await axios.post(`${API_URL}/todos`, todoData);
-    // ...
-  } catch (error) {
-    // ...
-  }
-};
+  const addTodo = async () => {
+    try {
+      const response = await axios.post(
+        `http://localhost:8080/todos`,
+        todoData
+      );
+
+      if (response) {
+        toast.success(response.data.message);
+
+        setTimeout(() => {
+          window.location.href = "/";
+        }, 2000);
+      }
+    } catch (error) {
+      toast.error("Failed to add!!", error);
+    }
+  };
 
   return (
     <div>
